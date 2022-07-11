@@ -15,4 +15,8 @@ class Coleccion extends Model
         'perfil_id',
         'tipo_coleccion_id'
     ];
+    public function propiedadesAdicionales()
+    {
+        return $this->hasMany(PropiedadAdicional::class);
+    }
 }

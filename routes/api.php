@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CartaController;
 use App\Http\Controllers\API\ColeccionController;
 use App\Http\Controllers\API\PerfilController;
+use App\Http\Controllers\API\PropiedadAdicionalController;
 use App\Http\Controllers\API\RarezaController;
 use App\Http\Controllers\API\TipoColeccionController;
 use Illuminate\Http\Request;
@@ -39,6 +40,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('rareza', RarezaController::class)->only([
         'show', 'store', 'update', 'destroy'
     ]);
+    Route::resource('propiedades-adicionales', PropiedadAdicionalController::class)->only([
+        'show', 'store', 'update', 'destroy'
+    ]);
+    Route::get('coleccion/propiedades-adicionales/{coleccion_id}', [PropiedadAdicionalController::class, 'propiedadByColection']);
 
 });
 
