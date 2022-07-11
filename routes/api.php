@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'show', 'store', 'update', 'destroy'
     ]);
     Route::get('coleccion/propiedades-adicionales/{coleccion_id}', [PropiedadAdicionalController::class, 'propiedadByColection']);
+    Route::post('cartas/propiedades-adicionales', [CartaController::class, 'storePropiedadesAdicionales']);
 
 });
 

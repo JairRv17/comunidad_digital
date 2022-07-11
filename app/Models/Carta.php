@@ -20,4 +20,8 @@ class Carta extends Model
     {
         return $this->hasMany(RarezaCartaSticker::class);
     }
+    public function propiedadesAdicionales()
+    {
+        return $this->hasMany(PropiedadCartaSticker::class);
+    }
 }
