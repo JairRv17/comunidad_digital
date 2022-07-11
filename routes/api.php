@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\CartasController;
+use App\Http\Controllers\API\CartaController;
 use App\Http\Controllers\API\ColeccionController;
 use App\Http\Controllers\API\PerfilController;
 use App\Http\Controllers\API\RarezaController;
@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('tipo-coleccion', TipoColeccionController::class)->only([
         'show', 'store', 'update', 'destroy'
     ]);
-    Route::resource('carta', CartasController::class)->only([
+    Route::resource('carta', CartaController::class)->only([
         'show', 'store', 'update', 'destroy'
     ]);
     Route::resource('rareza', RarezaController::class)->only([

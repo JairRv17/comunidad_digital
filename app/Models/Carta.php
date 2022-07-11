@@ -16,4 +16,8 @@ class Carta extends Model
         'cantidad',
         'numeracion'
     ];
+    public function rarezas()
+    {
+        return $this->hasMany(RarezaCartaSticker::class);
+    }
 }

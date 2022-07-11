@@ -4,15 +4,17 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Carta;
+use App\Models\Rareza;
+use App\Models\RarezaCartaSticker;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class CartasController extends Controller
+class CartaController extends Controller
 {
     public function show($id)
     {
-        $tipo = Carta::findOrFail($id);
-        return response($tipo, 200);
+        $carta = Carta::where('id', $id)->with('rarezas.rarezas')->first();
+        return response($carta, 200);
     }
     public function store(Request $request)
     {
@@ -21,17 +23,21 @@ class CartasController extends Controller
             'descripcion' => 'required|string|max:255',
             'condicion' => 'required|string|max:1',
             'cantidad' => 'required|numeric',
-            'numeracion' => 'required|string'
+            'numeracion' => 'required|string',
+            'rarezas_id' => 'array|nullable'
         ]);
-        $tipo = Carta::create([
+        $carta = Carta::create([
             'coleccion_id' => $request->input('coleccion_id'),
             'descripcion' => $request->input('descripcion'),
             'condicion' => $request->input('condicion'),
             'cantidad' => $request->input('cantidad'),
             'numeracion' => $request->input('numeracion')
         ]);
+        $rarezas_id = $request->input('rarezas_id');
 
-        return response($tipo, 201);
+        $this->storeRarezas($rarezas_id, $carta->id);
+
+        return response($carta, 201);
 
     }
     public function update(Request $request, $id)
@@ -41,23 +47,36 @@ class CartasController extends Controller
             'descripcion' => 'required|string|max:255',
             'condicion' => 'required|string|max:1',
             'cantidad' => 'required|numeric',
-            'numeracion' => 'required|string'
+            'numeracion' => 'required|string',
+            'rarezas_id' => 'array|nullable'
         ]);
-        $tipo = Carta::findOrFail($id);
-        $tipo->update([
+        $carta = Carta::findOrFail($id);
+        $carta->update([
             'descripcion' => $request->input('descripcion'),
             'condicion' => $request->input('condicion'),
             'cantidad' => $request->input('cantidad'),
             'numeracion' => $request->input('numeracion'),
             'updated_at' => (new Carbon())->now()
         ]);
+        $rarezas_id = $request->input('rarezas_id');
+        $this->storeRarezas($rarezas_id, $carta->id);
 
-        return response($tipo, 201);
+        return response($carta, 201);
     }
     public function destroy($id)
     {
-        $tipo = Carta::findOrFail($id);
-        $tipo->delete();
+        $carta = Carta::findOrFail($id);
+        $carta->delete();
         return response(['message' => 'Carta eliminada'], 200);
+    }
+    private function storeRarezas($rarezas_id, $carta_id)
+    {
+        RarezaCartaSticker::where('carta_id', $carta_id)->delete();
+        foreach ($rarezas_id as $rareza_id) {
+            RarezaCartaSticker::create([
+                'carta_id' => $carta_id,
+                'rareza_id' => $rareza_id
+            ]);
+        }
     }
 }
