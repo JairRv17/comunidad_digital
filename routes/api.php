@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ColeccionController;
 use App\Http\Controllers\API\PerfilController;
+use App\Http\Controllers\API\TipoColeccionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         'show', 'store', 'update', 'destroy'
     ]);
     Route::resource('coleccion', ColeccionController::class)->only([
+        'show', 'store', 'update', 'destroy'
+    ]);
+    Route::resource('tipo-coleccion', TipoColeccionController::class)->only([
         'show', 'store', 'update', 'destroy'
     ]);
 

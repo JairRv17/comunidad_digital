@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coleccion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ColeccionController extends Controller
@@ -17,7 +18,7 @@ class ColeccionController extends Controller
     {
         $request->validate([
             'descripcion' => 'required|string|max:255',
-            // 'tipo_coleccion_id' => 'required|exists:tipo_coleccion,id'
+            'tipo_coleccion_id' => 'required|exists:tipo_colecciones,id'
         ]);
         $coleccion = Coleccion::create([
             'descripcion' => $request->input('descripcion'),
@@ -32,12 +33,13 @@ class ColeccionController extends Controller
     {
         $request->validate([
             'descripcion' => 'required|string|max:255',
-            // 'tipo_coleccion_id' => 'required|exists:tipo_coleccion,id'
+            'tipo_coleccion_id' => 'required|exists:tipo_colecciones,id'
         ]);
         $coleccion = Coleccion::findOrFail($id);
         $coleccion->update([
             'descripcion' => $request->input('descripcion'),
-            'tipo_coleccion_id' => $request->input('tipo_coleccion_id')
+            'tipo_coleccion_id' => $request->input('tipo_coleccion_id'),
+            'updated_at' => (new Carbon())->now()
         ]);
 
         return response($coleccion, 201);
