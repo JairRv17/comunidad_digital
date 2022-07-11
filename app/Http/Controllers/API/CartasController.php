@@ -48,7 +48,8 @@ class CartasController extends Controller
             'descripcion' => $request->input('descripcion'),
             'condicion' => $request->input('condicion'),
             'cantidad' => $request->input('cantidad'),
-            'numeracion' => $request->input('numeracion')
+            'numeracion' => $request->input('numeracion'),
+            'updated_at' => (new Carbon())->now()
         ]);
 
         return response($tipo, 201);
