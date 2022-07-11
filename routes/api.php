@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ColeccionController;
 use App\Http\Controllers\API\PerfilController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,10 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
-    // Perfil
     Route::resource('perfil', PerfilController::class)->only([
+        'show', 'store', 'update', 'destroy'
+    ]);
+    Route::resource('coleccion', ColeccionController::class)->only([
         'show', 'store', 'update', 'destroy'
     ]);
 
