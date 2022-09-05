@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
@@ -48,7 +49,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 });
 
-
+// Test
+Route::get('test', function () {
+    return view('test');
+});
 
 /*
     Route::prefix('perfil')->group(function () {
