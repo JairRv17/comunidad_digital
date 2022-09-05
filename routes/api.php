@@ -21,38 +21,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::get('register', [AuthController::class, 'index']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::resource('perfil', PerfilController::class)->only([
-        'show', 'store', 'update', 'destroy'
-    ]);
-    Route::resource('coleccion', ColeccionController::class)->only([
-        'show', 'store', 'update', 'destroy'
-    ]);
-    Route::resource('tipo-coleccion', TipoColeccionController::class)->only([
-        'show', 'store', 'update', 'destroy'
-    ]);
-    Route::resource('carta', CartaController::class)->only([
-        'show', 'store', 'update', 'destroy'
-    ]);
-    Route::resource('rareza', RarezaController::class)->only([
-        'show', 'store', 'update', 'destroy'
-    ]);
-    Route::resource('propiedades-adicionales', PropiedadAdicionalController::class)->only([
-        'show', 'store', 'update', 'destroy'
-    ]);
-    Route::get('coleccion/propiedades-adicionales/{coleccion_id}', [PropiedadAdicionalController::class, 'propiedadByColection']);
-    Route::post('cartas/propiedades-adicionales', [CartaController::class, 'storePropiedadesAdicionales']);
+// Route::middleware(['auth:sanctum'])->group(function () {
+//     Route::post('logout', [AuthController::class, 'logout']);
+//     Route::resource('perfil', PerfilController::class)->only([
+//         'show', 'store', 'update', 'destroy'
+//     ]);
+//     Route::resource('coleccion', ColeccionController::class)->only([
+//         'show', 'store', 'update', 'destroy'
+//     ]);
+//     Route::resource('tipo-coleccion', TipoColeccionController::class)->only([
+//         'show', 'store', 'update', 'destroy'
+//     ]);
+//     Route::resource('carta', CartaController::class)->only([
+//         'show', 'store', 'update', 'destroy'
+//     ]);
+//     Route::resource('rareza', RarezaController::class)->only([
+//         'show', 'store', 'update', 'destroy'
+//     ]);
+//     Route::resource('propiedades-adicionales', PropiedadAdicionalController::class)->only([
+//         'show', 'store', 'update', 'destroy'
+//     ]);
+//     Route::get('coleccion/propiedades-adicionales/{coleccion_id}', [PropiedadAdicionalController::class, 'propiedadByColection']);
+//     Route::post('cartas/propiedades-adicionales', [CartaController::class, 'storePropiedadesAdicionales']);
 
-});
+// });
 
 // Test
-Route::get('test', function () {
-    return view('test');
-});
+
+// Route::get('test', function () {
+//     return view('test');
+// });
 
 /*
     Route::prefix('perfil')->group(function () {
