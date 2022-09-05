@@ -47,7 +47,14 @@ class AuthController extends Controller
 
         $user = User::where('email', $email)->first();
         if (!$user || !Hash::check($password, $user->password)) {
-            return response(['message' => 'Credenciales no válidas'], 401);
+            // return response(['message' => 'Credenciales no válidas'], 401);
+            return response()->json([
+                'errors' => [
+                    'message' => [
+                        'Credenciales no válidas.'
+                    ]
+                ]
+            ], 401);
         } else {
             $token = $user->createToken('Usertoken')->plainTextToken;
 
@@ -56,5 +63,9 @@ class AuthController extends Controller
                 'token' => $token
             ], 200);
         }
+    }
+    public function index()
+    {
+        return view('login.login');
     }
 }

@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^2.3.3",
+        "sweetalert2": "^11.4.29",
         "vue": "^3.2.38",
         "vue-loader": "^17.0.0"
     }

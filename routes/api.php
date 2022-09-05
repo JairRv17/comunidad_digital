@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::get('login', [AuthController::class, 'index']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
@@ -50,9 +51,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 // Test
-Route::get('test', function () {
-    return view('test');
-});
+// Route::get('test', function () {
+//     return view('test');
+// });
 
 /*
     Route::prefix('perfil')->group(function () {
