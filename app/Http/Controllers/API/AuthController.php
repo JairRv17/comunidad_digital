@@ -33,9 +33,14 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        // auth()->user()->tokens()->delete();
         return response(['message' => 'Sesión cerrada correctamente']);
     }
+    public function index()
+    {
+        return view('register');
+    }
+    
     public function login(Request $request)
     {
         $request->validate([
